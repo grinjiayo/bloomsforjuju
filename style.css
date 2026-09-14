@@ -131,29 +131,124 @@ body {
 
 .flower-overflow {
     position: absolute;
-    left: 0;
-    bottom: 0;
+    inset: 0;
     width: 100%;
-    height: 390px;
-    z-index: 3;
+    height: 100%;
+    overflow: hidden;
     pointer-events: none;
+    z-index: 3;
 }
 
 /* Individual flowers */
-.random-flower {
+.random-flower,
+.tiny-flower {
     position: absolute;
-    width: 75px;
-    height: 75px;
+    z-index: 4;
+
     transform: scale(0);
     opacity: 0;
-    transition:
-        transform 1.15s cubic-bezier(.17,.67,.3,1.4),
-        opacity .8s ease;
+
+    transition: none;
 }
 
-.random-flower.bloom {
-    transform: scale(1) rotate(var(--rotation, 0deg));
-    opacity: 1;
+.random-flower:nth-child(1) {
+    left: 8%;
+    top: 15%;
+}
+
+.random-flower:nth-child(2) {
+    left: 25%;
+    top: 30%;
+}
+
+.random-flower:nth-child(3) {
+    left: 45%;
+    top: 12%;
+}
+
+.random-flower:nth-child(4) {
+    left: 65%;
+    top: 25%;
+}
+
+.random-flower:nth-child(5) {
+    left: 85%;
+    top: 15%;
+}
+
+.random-flower:nth-child(6) {
+    left: 15%;
+    top: 50%;
+}
+
+.random-flower:nth-child(7) {
+    left: 35%;
+    top: 55%;
+}
+
+.random-flower:nth-child(8) {
+    left: 55%;
+    top: 45%;
+}
+
+.random-flower:nth-child(9) {
+    left: 75%;
+    top: 55%;
+}
+
+.random-flower:nth-child(10) {
+    left: 92%;
+    top: 45%;
+}
+
+.random-flower:nth-child(11) {
+    left: 10%;
+    top: 75%;
+}
+
+.random-flower:nth-child(12) {
+    left: 30%;
+    top: 82%;
+}
+
+.random-flower:nth-child(13) {
+    left: 60%;
+    top: 75%;
+}
+
+.random-flower:nth-child(14) {
+    left: 82%;
+    top: 82%;
+}
+.random-flower.bloom,
+.tiny-flower.bloom {
+    animation: giantBloom 1.8s cubic-bezier(0.17, 0.67, 0.3, 1.3) forwards;
+}
+
+@keyframes giantBloom {
+
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    35% {
+        transform: scale(2.5);
+        opacity: 1;
+    }
+
+    55% {
+        transform: scale(1.7);
+    }
+
+    75% {
+        transform: scale(2.1);
+    }
+
+    100% {
+        transform: scale(1.8);
+        opacity: 1;
+    }
 }
 
 /* Petals */

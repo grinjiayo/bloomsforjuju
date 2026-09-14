@@ -1,128 +1,172 @@
-const bloomButton = document.getElementById("bloomButton");
-const backgroundMusic = document.getElementById("backgroundMusic");
+document.addEventListener("DOMContentLoaded", () => {
 
-bloomButton.addEventListener("click", () => {
-    backgroundMusic.play().catch(error => {
-        console.log("Music could not start:", error);
-    });
-});
+    const bloomButton = document.getElementById("bloomButton");
+    const backgroundMusic = document.getElementById("backgroundMusic");
 
-const flowers = document.querySelectorAll(
-    ".random-flower, .tiny-flower"
-);
+    const flowers = document.querySelectorAll(
+        ".random-flower, .tiny-flower"
+    );
 
-const giftSection = document.getElementById("giftSection");
-const gift = document.getElementById("gift");
+    const giftSection = document.getElementById("giftSection");
+    const gift = document.getElementById("gift");
 
-const letterSection = document.getElementById("letterSection");
-
-const memoriesButton = document.getElementById("memoriesButton");
-const memories = document.getElementById("memories");
+    const letterSection = document.getElementById("letterSection");
+    const memoriesButton = document.getElementById("memoriesButton");
+    const memoriesSection = document.getElementById("memories");
 
 
-/* =========================================
-   BLOOMING INTRO
-========================================= */
+    /* =========================
+       AUTOMATIC BLOOM
+    ========================= */
 
-bloomButton.addEventListener("click", () => {
+    function startBloom() {
 
-    // Prevent clicking the button again
-    bloomButton.disabled = true;
-
-    bloomButton.textContent = "Watch them bloom... ✿";
+        bloomButton.disabled = true;
+        bloomButton.textContent = "Let the flowers bloom... 🌸";
 
 
-    // Bloom flowers one by one
-    flowers.forEach((flower, index) => {
+        // Automatically start music
+        backgroundMusic.volume = 0.5;
 
+        backgroundMusic.play().catch((error) => {
+            console.log("Music autoplay blocked:", error);
+        });
+
+
+        // Bloom flowers one by one
+        flowers.forEach((flower, index) => {
+
+            setTimeout(() => {
+                flower.classList.add("bloom");
+            }, index * 180);
+
+        });
+
+
+        // Calculate bloom duration
+        const bloomDuration =
+            (flowers.length * 180) + 1800;
+
+
+        // Change button after blooming
         setTimeout(() => {
 
-            flower.classList.add("bloom");
+            bloomButton.textContent =
+                "The garden is blooming 🌷";
 
-        }, index * 120);
+            bloomButton.classList.add("bloomed");
 
-    });
-
-
-    // Change button text after the flowers bloom
-    setTimeout(() => {
-
-        bloomButton.textContent =
-            "A little garden for Juju 💙";
-
-    }, 2200);
+        }, bloomDuration);
 
 
-    // Show gift section
-    setTimeout(() => {
-
-        giftSection.classList.add("show");
-
-
-        // Scroll to gift
+        // Automatically move to gift section
         setTimeout(() => {
+
+            giftSection.classList.add("show");
 
             giftSection.scrollIntoView({
                 behavior: "smooth"
             });
 
-        }, 300);
-
-    }, 2700);
-
-});
-
-
-/* =========================================
-   GIFT OPENING
-========================================= */
-
-gift.addEventListener("click", () => {
-
-    // Don't allow the gift to be opened twice
-    if (gift.classList.contains("opened")) {
-        return;
-    }
-
-
-    // Open gift
-    gift.classList.add("opened");
-
-
-    // Change text underneath gift
-    const giftText = document.querySelector(".click-gift");
-
-    if (giftText) {
-
-        giftText.textContent =
-            "Something special inside... 💙";
+        }, bloomDuration + 1000);
 
     }
 
 
-    // Go to letter
+    /* =========================
+       START AUTOMATICALLY
+    ========================= */
+
+    // Wait a little after page loads
     setTimeout(() => {
+        startBloom();
+    }, 1500);
 
-        letterSection.scrollIntoView({
+
+    /* =========================
+       GIFT
+    ========================= */
+
+    gift.addEventListener("click", () => {
+
+        gift.classList.add("opened");
+
+        setTimeout(() => {
+
+            letterSection.scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }, 1000);
+
+    });
+
+
+    /* =========================
+       MEMORIES
+    ========================= */
+
+    memoriesButton.addEventListener("click", () => {
+
+        memoriesSection.scrollIntoView({
             behavior: "smooth"
         });
 
-    }, 1000);
-
-});
-
-
-/* =========================================
-   LETTER → MEMORIES
-========================================= */
-
-memoriesButton.addEventListener("click", () => {
-
-    memories.scrollIntoView({
-        behavior: "smooth"
     });
 
 });
+
+
+// /* =========================================
+//    GIFT OPENING
+// ========================================= */
+
+// gift.addEventListener("click", () => {
+
+//     // Don't allow the gift to be opened twice
+//     if (gift.classList.contains("opened")) {
+//         return;
+//     }
+
+
+//     // Open gift
+//     gift.classList.add("opened");
+
+
+//     // Change text underneath gift
+//     const giftText = document.querySelector(".click-gift");
+
+//     if (giftText) {
+
+//         giftText.textContent =
+//             "Something special inside... 💙";
+
+//     }
+
+
+//     // Go to letter
+//     setTimeout(() => {
+
+//         letterSection.scrollIntoView({
+//             behavior: "smooth"
+//         });
+
+//     }, 1000);
+
+// });
+
+
+// /* =========================================
+//    LETTER → MEMORIES
+// ========================================= */
+
+// memoriesButton.addEventListener("click", () => {
+
+//     memories.scrollIntoView({
+//         behavior: "smooth"
+//     });
+
+// });
 
 
 /* =========================================
