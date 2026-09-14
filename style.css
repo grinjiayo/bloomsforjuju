@@ -1,0 +1,1231 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #24445c;
+    background: #eaf7ff;
+    overflow-x: hidden;
+}
+
+
+/* =========================================
+   OPENING
+========================================= */
+
+.opening {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at 50% 25%,
+            #ffffff 0%,
+            #eaf8ff 38%,
+            #cdeeff 72%,
+            #b5e1f7 100%
+        );
+}
+
+.sky-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+
+    background: rgba(255,255,255,0.5);
+    border-radius: 50%;
+
+    filter: blur(80px);
+
+    top: -250px;
+    left: 50%;
+
+    transform: translateX(-50%);
+}
+
+.opening-content {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+
+    margin-bottom: 120px;
+
+    animation: fadeIn 1.5s ease;
+}
+
+.small-text {
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #6198b8;
+    margin-bottom: 12px;
+}
+
+.opening h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(80px, 15vw, 150px);
+    font-weight: 400;
+    color: #579ac1;
+
+    text-shadow:
+        0 5px 20px rgba(71, 145, 185, 0.2);
+}
+
+.opening-message {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: #365d76;
+
+    margin-top: 5px;
+}
+
+.opening-sub {
+    font-size: 14px;
+    color: #6e9db7;
+    margin-top: 8px;
+}
+
+.bloom-button {
+    margin-top: 30px;
+
+    border: none;
+    border-radius: 50px;
+
+    padding: 14px 28px;
+
+    background: #79b8d8;
+    color: white;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 25px rgba(73, 142, 179, 0.25);
+
+    transition: 0.3s;
+}
+
+.bloom-button:hover {
+    transform: translateY(-3px);
+    background: #619fc2;
+}
+
+
+/* =========================================
+   OVERFLOWING FLOWER GARDEN
+========================================= */
+
+.flower-overflow {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 390px;
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* Individual flowers */
+.random-flower {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    transform: scale(0);
+    opacity: 0;
+    transition:
+        transform 1.15s cubic-bezier(.17,.67,.3,1.4),
+        opacity .8s ease;
+}
+
+.random-flower.bloom {
+    transform: scale(1) rotate(var(--rotation, 0deg));
+    opacity: 1;
+}
+
+/* Petals */
+.random-flower span {
+    position: absolute;
+    width: 34px;
+    height: 47px;
+    left: 20px;
+    top: 12px;
+    border-radius: 50% 50% 45% 45%;
+    transform-origin: 50% 85%;
+}
+
+.random-flower span:nth-child(1) {
+    transform: rotate(0deg) translateY(-13px);
+}
+
+.random-flower span:nth-child(2) {
+    transform: rotate(72deg) translateY(-13px);
+}
+
+.random-flower span:nth-child(3) {
+    transform: rotate(144deg) translateY(-13px);
+}
+
+.random-flower span:nth-child(4) {
+    transform: rotate(216deg) translateY(-13px);
+}
+
+.random-flower span:nth-child(5) {
+    transform: rotate(288deg) translateY(-13px);
+}
+
+/* Flower centers */
+.random-flower b {
+    position: absolute;
+    width: 19px;
+    height: 19px;
+    left: 28px;
+    top: 28px;
+    border-radius: 50%;
+    background: #f6d487;
+    z-index: 5;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+/* Flower colors */
+.random-flower.maroon span {
+    background: #7b2638;
+}
+
+.random-flower.blue span {
+    background: #83c7e5;
+}
+
+.random-flower.pink span {
+    background: #e5a9bc;
+}
+
+.random-flower.cream span {
+    background: #f4dfb5;
+}
+
+.random-flower.lavender span {
+    background: #b9acd9;
+}
+
+/* Random overflowing positions */
+.f1 {
+    left: -3%;
+    bottom: 25px;
+    width: 105px;
+    height: 105px;
+    --rotation: -12deg;
+}
+
+.f2 {
+    left: 5%;
+    bottom: 135px;
+    width: 62px;
+    height: 62px;
+    --rotation: 18deg;
+}
+
+.f3 {
+    left: 13%;
+    bottom: -5px;
+    width: 72px;
+    height: 72px;
+    --rotation: -8deg;
+}
+
+.f4 {
+    left: 21%;
+    bottom: 175px;
+    width: 55px;
+    height: 55px;
+    --rotation: 12deg;
+}
+
+.f5 {
+    left: 29%;
+    bottom: 35px;
+    width: 92px;
+    height: 92px;
+    --rotation: -15deg;
+}
+
+.f6 {
+    left: 39%;
+    bottom: 150px;
+    width: 65px;
+    height: 65px;
+    --rotation: 10deg;
+}
+
+.f7 {
+    left: 46%;
+    bottom: -15px;
+    width: 112px;
+    height: 112px;
+    --rotation: -5deg;
+}
+
+.f8 {
+    left: 56%;
+    bottom: 120px;
+    width: 73px;
+    height: 73px;
+    --rotation: 15deg;
+}
+
+.f9 {
+    left: 64%;
+    bottom: 15px;
+    width: 96px;
+    height: 96px;
+    --rotation: -10deg;
+}
+
+.f10 {
+    left: 73%;
+    bottom: 180px;
+    width: 57px;
+    height: 57px;
+    --rotation: 13deg;
+}
+
+.f11 {
+    left: 79%;
+    bottom: 35px;
+    width: 105px;
+    height: 105px;
+    --rotation: -16deg;
+}
+
+.f12 {
+    left: 87%;
+    bottom: 145px;
+    width: 70px;
+    height: 70px;
+    --rotation: 9deg;
+}
+
+.f13 {
+    left: 93%;
+    bottom: 5px;
+    width: 90px;
+    height: 90px;
+    --rotation: -11deg;
+}
+
+.f14 {
+    left: 98%;
+    bottom: 125px;
+    width: 58px;
+    height: 58px;
+    --rotation: 17deg;
+}
+
+/* Tiny wild flowers */
+.tiny-flower {
+    position: absolute;
+    font-size: 27px;
+    color: #7b2638;
+    opacity: 0;
+    transform: scale(0);
+    transition:
+        transform 1s ease,
+        opacity 1s ease;
+    animation: tinyFloat 4s ease-in-out infinite;
+}
+
+.tiny-flower.bloom {
+    transform: scale(1);
+    opacity: .85;
+}
+
+.tf1 { left: 3%; bottom: 225px; }
+.tf2 { left: 11%; bottom: 70px; color: #82bfdc; }
+.tf3 { left: 27%; bottom: 235px; color: #b59bcf; }
+.tf4 { left: 37%; bottom: 75px; color: #7b2638; }
+.tf5 { left: 52%; bottom: 235px; color: #d796ae; }
+.tf6 { left: 68%; bottom: 70px; color: #7b2638; }
+.tf7 { left: 81%; bottom: 230px; color: #82bfdc; }
+.tf8 { left: 94%; bottom: 75px; color: #b59bcf; }
+
+@keyframes tinyFloat {
+    0%, 100% {
+        margin-top: 0;
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        margin-top: -8px;
+        transform: scale(1.05) rotate(8deg);
+    }
+}
+
+/* Natural grass covering the bottom edge */
+.grass {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 105px;
+    z-index: 4;
+    background: #86b99e;
+    clip-path: polygon(
+        0 35%, 3% 15%, 5% 38%, 8% 8%, 11% 35%,
+        14% 16%, 17% 40%, 20% 10%, 23% 38%,
+        27% 14%, 30% 37%, 33% 18%, 36% 40%,
+        40% 9%, 43% 37%, 47% 15%, 50% 40%,
+        54% 10%, 57% 38%, 60% 14%, 63% 40%,
+        67% 9%, 70% 37%, 74% 16%, 77% 40%,
+        81% 8%, 84% 38%, 88% 14%, 91% 40%,
+        95% 10%, 100% 35%, 100% 100%, 0 100%
+    );
+}
+
+/* =========================================
+   GIFT SECTION
+========================================= */
+
+.gift-section {
+    min-height: 100vh;
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 80px 20px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #d9f1fc,
+            #f2fbff
+        );
+
+    opacity: 0;
+    transform: translateY(50px);
+
+    pointer-events: none;
+
+    transition: 1s ease;
+}
+
+.gift-section.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 4px;
+
+    font-size: 11px;
+
+    color: #70a8c5;
+
+    margin-bottom: 15px;
+}
+
+.gift-section h2 {
+    font-family: 'DM Serif Display', serif;
+
+    font-size: clamp(35px, 6vw, 60px);
+
+    color: #365f78;
+}
+
+.gift-description {
+    margin-top: 12px;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+    color: #6d98ae;
+}
+
+.gift {
+    position: relative;
+
+    width: 190px;
+    height: 230px;
+
+    margin-top: 45px;
+
+    cursor: pointer;
+
+    animation: giftFloat 3s ease-in-out infinite;
+}
+
+.gift-glow {
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    left: -15px;
+    top: 10px;
+
+    border-radius: 50%;
+
+    background: rgba(117, 190, 225, 0.25);
+
+    filter: blur(25px);
+}
+
+.gift-box {
+    position: relative;
+
+    width: 150px;
+    height: 140px;
+
+    margin: auto;
+
+    top: 45px;
+}
+
+.box-body {
+    position: absolute;
+
+    bottom: 0;
+
+    width: 150px;
+    height: 105px;
+
+    background: #8ec9e8;
+
+    border-radius: 5px;
+
+    box-shadow:
+        0 15px 30px rgba(70, 130, 160, .2);
+}
+
+.box-lid {
+    position: absolute;
+
+    top: 0;
+
+    left: -8px;
+
+    width: 166px;
+    height: 42px;
+
+    background: #72b6dc;
+
+    border-radius: 5px;
+
+    z-index: 3;
+
+    transition: .8s ease;
+}
+
+.ribbon-horizontal,
+.ribbon-horizontal-body {
+    position: absolute;
+
+    width: 100%;
+    height: 18px;
+
+    top: 12px;
+
+    background: #d7f0fc;
+}
+
+.ribbon-vertical {
+    position: absolute;
+
+    left: 64px;
+
+    width: 22px;
+    height: 100%;
+
+    background: #d7f0fc;
+}
+
+.ribbon-horizontal-body {
+    display: none;
+}
+
+.bow {
+    position: absolute;
+
+    top: -28px;
+    left: 45px;
+
+    z-index: 5;
+
+    transition: .8s ease;
+}
+
+.bow-left,
+.bow-right {
+    position: absolute;
+
+    width: 48px;
+    height: 35px;
+
+    background: #bce6f7;
+
+    border-radius: 50% 50% 10% 50%;
+}
+
+.bow-left {
+    right: 3px;
+    transform: rotate(25deg);
+}
+
+.bow-right {
+    left: 3px;
+    transform: rotate(-25deg);
+}
+
+.bow-center {
+    position: absolute;
+
+    width: 20px;
+    height: 20px;
+
+    background: #8bc6e5;
+
+    border-radius: 50%;
+
+    left: 34px;
+    top: 8px;
+
+    z-index: 2;
+}
+
+.click-gift {
+    position: absolute;
+
+    width: 100%;
+
+    bottom: 0;
+
+    font-size: 12px;
+
+    color: #6b9ab2;
+
+    letter-spacing: 1px;
+}
+
+.gift.opened .box-lid {
+    transform: translateY(-45px) rotate(-5deg);
+}
+
+.gift.opened .bow {
+    transform: translateY(-55px) rotate(-8deg);
+}
+
+.gift.opened {
+    animation: none;
+}
+
+
+/* =========================================
+   FLOATING FLOWERS
+========================================= */
+
+.floating-flower {
+    position: absolute;
+
+    font-size: 40px;
+
+    color: #a8d9ee;
+
+    opacity: .5;
+
+    animation: floatFlower 5s ease-in-out infinite;
+}
+
+.flower-float-1 {
+    left: 10%;
+    top: 15%;
+}
+
+.flower-float-2 {
+    right: 12%;
+    top: 25%;
+
+    animation-delay: 1s;
+}
+
+.flower-float-3 {
+    left: 17%;
+    bottom: 15%;
+
+    animation-delay: 2s;
+}
+
+
+/* =========================================
+   LETTER
+========================================= */
+
+.letter-section {
+    min-height: 100vh;
+
+    padding: 100px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #ffffff,
+            #e5f6ff
+        );
+}
+
+.paper {
+    position: relative;
+
+    width: min(720px, 100%);
+
+    padding: 65px clamp(25px, 7vw, 75px);
+
+    background: #fff;
+
+    box-shadow:
+        0 25px 70px rgba(70, 130, 160, .15);
+
+    border: 1px solid #dceff8;
+
+    text-align: center;
+}
+
+.paper::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 12px;
+
+    border: 1px solid #d9edf6;
+
+    pointer-events: none;
+}
+
+.paper-decoration {
+    position: absolute;
+
+    font-size: 45px;
+
+    color: #9ed5ec;
+}
+
+.top-left {
+    top: 20px;
+    left: 25px;
+}
+
+.bottom-right {
+    bottom: 20px;
+    right: 25px;
+}
+
+.letter-label {
+    text-transform: uppercase;
+
+    letter-spacing: 4px;
+
+    font-size: 10px;
+
+    color: #75a9c1;
+}
+
+.paper h2 {
+    margin-top: 12px;
+
+    font-family: 'Great Vibes', cursive;
+
+    font-size: 55px;
+
+    font-weight: 400;
+
+    color: #579bc0;
+}
+
+.letter-text {
+    margin-top: 30px;
+
+    text-align: left;
+
+    color: #58788b;
+
+    font-size: 14px;
+
+    line-height: 2;
+}
+
+.letter-text p {
+    margin-bottom: 18px;
+}
+
+.closing {
+    font-family: 'DM Serif Display', serif;
+
+    font-size: 19px;
+
+    color: #4c8bae;
+
+    text-align: center;
+
+    margin-top: 30px;
+}
+
+.signature {
+    text-align: right;
+
+    color: #6d9cb4;
+}
+
+.signature span {
+    font-family: 'Great Vibes', cursive;
+
+    font-size: 27px;
+
+    color: #5999ba;
+}
+
+.memory-button {
+    margin-top: 30px;
+
+    padding: 13px 25px;
+
+    border: 1px solid #91c9e4;
+
+    background: transparent;
+
+    border-radius: 30px;
+
+    color: #5798b9;
+
+    cursor: pointer;
+
+    font-family: 'Poppins', sans-serif;
+
+    transition: .3s;
+}
+
+.memory-button:hover {
+    background: #e2f5fd;
+
+    transform: translateY(-3px);
+}
+
+
+/* =========================================
+   MEMORIES
+========================================= */
+
+.memories-section {
+    min-height: 100vh;
+
+    padding: 100px 7%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #dff4ff,
+            #f7fcff
+        );
+}
+
+.memory-header {
+    text-align: center;
+
+    margin-bottom: 60px;
+}
+
+.memory-header h2 {
+    font-family: 'Great Vibes', cursive;
+
+    font-size: clamp(55px, 9vw, 90px);
+
+    font-weight: 400;
+
+    color: #5a9fc2;
+}
+
+.memory-header h3 {
+    font-family: 'DM Serif Display', serif;
+
+    font-size: clamp(30px, 5vw, 50px);
+
+    color: #365f78;
+}
+
+.memory-header > p:last-child {
+    margin-top: 12px;
+
+    color: #7398aa;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   COLLAGE
+========================================= */
+
+.collage {
+    width: min(1000px, 100%);
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 22px;
+
+    align-items: center;
+}
+
+.photo {
+    position: relative;
+
+    padding: 9px;
+
+    background: white;
+
+    box-shadow:
+        0 15px 35px rgba(75, 125, 150, .15);
+
+    transition: .4s;
+
+    overflow: hidden;
+}
+
+.photo:hover {
+    transform: translateY(-8px) rotate(0deg) !important;
+
+    box-shadow:
+        0 25px 45px rgba(75, 125, 150, .2);
+}
+
+.photo img {
+    display: block;
+
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+}
+
+.photo span {
+    display: block;
+
+    text-align: center;
+
+    padding: 12px 5px 7px;
+
+    font-family: 'Great Vibes', cursive;
+
+    font-size: 21px;
+
+    color: #6799b1;
+}
+
+.photo-1 {
+    transform: rotate(-4deg);
+}
+
+.photo-2 {
+    transform: rotate(3deg);
+
+    margin-top: 30px;
+}
+
+.photo-3 {
+    transform: rotate(-2deg);
+}
+
+.photo-4 {
+    transform: rotate(3deg);
+
+    margin-top: -25px;
+}
+
+.photo-5 {
+    transform: rotate(-3deg);
+}
+
+.photo-6 {
+    transform: rotate(4deg);
+
+    margin-top: -20px;
+}
+
+
+/* =========================================
+   FINAL MESSAGE
+========================================= */
+
+.final-message {
+    text-align: center;
+
+    margin-top: 100px;
+
+    padding-bottom: 40px;
+}
+
+.mini-flower {
+    font-size: 35px;
+
+    color: #81bdd8;
+
+    animation: spinFlower 6s linear infinite;
+}
+
+.final-message h2 {
+    margin-top: 10px;
+
+    font-family: 'Great Vibes', cursive;
+
+    font-size: 60px;
+
+    font-weight: 400;
+
+    color: #589bbd;
+}
+
+.final-message p {
+    color: #7699aa;
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+}
+
+.heart {
+    margin-top: 15px;
+
+    font-size: 35px;
+
+    color: #78b6d3;
+}
+
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes giftFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+@keyframes floatFlower {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(10deg);
+    }
+}
+
+@keyframes spinFlower {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .opening-content {
+        margin-bottom: 100px;
+        padding: 0 20px;
+    }
+
+    .opening-message {
+        font-size: 18px;
+    }
+
+    .flower {
+        transform: scale(.7);
+    }
+
+    .flower.bloom {
+        transform: scale(.7);
+    }
+
+    .flower-1 {
+        left: -5%;
+    }
+
+    .flower-2 {
+        left: 18%;
+    }
+
+    .flower-3 {
+        left: 40%;
+    }
+
+    .flower-4 {
+        left: 63%;
+    }
+
+    .flower-5 {
+        left: 83%;
+    }
+
+    .collage {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 15px;
+    }
+
+    .photo-2,
+    .photo-4,
+    .photo-6 {
+        margin-top: 0;
+    }
+
+    .paper {
+        padding: 55px 30px;
+    }
+
+    .paper h2 {
+        font-size: 45px;
+    }
+
+    .letter-text {
+        font-size: 13px;
+    }
+
+    .final-message h2 {
+        font-size: 48px;
+    }
+}
+
+@media (max-width: 450px) {
+
+    .collage {
+        grid-template-columns: 1fr;
+        max-width: 330px;
+    }
+
+    .photo {
+        margin: 0 !important;
+    }
+
+    .photo:nth-child(even) {
+        transform: rotate(2deg);
+    }
+
+    .photo:nth-child(odd) {
+        transform: rotate(-2deg);
+    }
+
+}
+
+
+/* =========================================
+   MOBILE FLOWER GARDEN
+========================================= */
+
+@media (max-width: 700px) {
+
+    .flower-overflow {
+        height: 315px;
+    }
+
+    .random-flower {
+        transform: scale(.7);
+    }
+
+    .random-flower.bloom {
+        transform: scale(.7) rotate(var(--rotation, 0deg));
+    }
+
+    /* Keep the smaller flowers hidden on narrow screens
+       so the center remains visible. */
+    .f2,
+    .f4,
+    .f6,
+    .f8,
+    .f10,
+    .f12,
+    .f14 {
+        display: none;
+    }
+
+    .tiny-flower {
+        font-size: 21px;
+    }
+}
+
+@media (max-width: 450px) {
+
+    .flower-overflow {
+        height: 285px;
+    }
+
+    .f1,
+    .f5,
+    .f7,
+    .f9,
+    .f11,
+    .f13 {
+        transform: scale(.58);
+    }
+
+    .random-flower.bloom {
+        transform: scale(.58) rotate(var(--rotation, 0deg));
+    }
+
+    .tf3,
+    .tf5,
+    .tf7 {
+        display: none;
+    }
+}
