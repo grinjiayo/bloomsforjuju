@@ -6,7 +6,7 @@
 
 html.scroll-locked,
 body.scroll-locked {
-    overflow: hidden;
+    overflow: hidden !important;
 }
 
 html,
@@ -322,118 +322,6 @@ body {
     background: #b9acd9;
 }
 
-/* Random overflowing positions */
-.f1 {
-    left: -3%;
-    bottom: 25px;
-    width: 105px;
-    height: 105px;
-    --rotation: -12deg;
-}
-
-.f2 {
-    left: 5%;
-    bottom: 135px;
-    width: 62px;
-    height: 62px;
-    --rotation: 18deg;
-}
-
-.f3 {
-    left: 13%;
-    bottom: -5px;
-    width: 72px;
-    height: 72px;
-    --rotation: -8deg;
-}
-
-.f4 {
-    left: 21%;
-    bottom: 175px;
-    width: 55px;
-    height: 55px;
-    --rotation: 12deg;
-}
-
-.f5 {
-    left: 29%;
-    bottom: 35px;
-    width: 92px;
-    height: 92px;
-    --rotation: -15deg;
-}
-
-.f6 {
-    left: 39%;
-    bottom: 150px;
-    width: 65px;
-    height: 65px;
-    --rotation: 10deg;
-}
-
-.f7 {
-    left: 46%;
-    bottom: -15px;
-    width: 112px;
-    height: 112px;
-    --rotation: -5deg;
-}
-
-.f8 {
-    left: 56%;
-    bottom: 120px;
-    width: 73px;
-    height: 73px;
-    --rotation: 15deg;
-}
-
-.f9 {
-    left: 64%;
-    bottom: 15px;
-    width: 96px;
-    height: 96px;
-    --rotation: -10deg;
-}
-
-.f10 {
-    left: 73%;
-    bottom: 180px;
-    width: 57px;
-    height: 57px;
-    --rotation: 13deg;
-}
-
-.f11 {
-    left: 79%;
-    bottom: 35px;
-    width: 105px;
-    height: 105px;
-    --rotation: -16deg;
-}
-
-.f12 {
-    left: 87%;
-    bottom: 145px;
-    width: 70px;
-    height: 70px;
-    --rotation: 9deg;
-}
-
-.f13 {
-    left: 93%;
-    bottom: 5px;
-    width: 90px;
-    height: 90px;
-    --rotation: -11deg;
-}
-
-.f14 {
-    left: 98%;
-    bottom: 125px;
-    width: 58px;
-    height: 58px;
-    --rotation: 17deg;
-}
 
 /* Tiny wild flowers */
 .tiny-flower {
@@ -781,13 +669,23 @@ body {
 ========================================= */
 
 .letter-section {
-    min-height: 100vh;
+    /* min-height: 100vh;
 
     padding: 100px 20px;
 
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
+
+     height: 100vh;
+    min-height: 100vh;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    scroll-behavior: smooth;
+
+    padding: 60px 20px;
 
     background:
         radial-gradient(
@@ -795,6 +693,19 @@ body {
             #ffffff,
             #e5f6ff
         );
+}
+
+.letter-section::-webkit-scrollbar {
+    width: 7px;
+}
+
+.letter-section::-webkit-scrollbar-thumb {
+    background: rgba(100, 150, 200, 0.5);
+    border-radius: 20px;
+}
+
+.letter-section::-webkit-scrollbar-track {
+    background: transparent;
 }
 
 .paper {
@@ -940,9 +851,19 @@ body {
 ========================================= */
 
 .memories-section {
+    /* min-height: 100vh;
+
+    padding: 100px 7%; */
+
+    height: 100vh;
     min-height: 100vh;
 
-    padding: 100px 7%;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    scroll-behavior: smooth;
+
+    padding: 60px 20px;
 
     background:
         linear-gradient(
@@ -950,6 +871,19 @@ body {
             #dff4ff,
             #f7fcff
         );
+}
+
+.memories-section::-webkit-scrollbar {
+    width: 7px;
+}
+
+.memories-section::-webkit-scrollbar-thumb {
+    background: rgba(100, 150, 200, 0.5);
+    border-radius: 20px;
+}
+
+.memories-section::-webkit-scrollbar-track {
+    background: transparent;
 }
 
 .memory-header {
@@ -1273,62 +1207,272 @@ body {
 /* =========================================
    MOBILE FLOWER GARDEN
 ========================================= */
+/* =========================================
+   MOBILE FULL-SCREEN FLOWER GARDEN
+========================================= */
 
 @media (max-width: 700px) {
 
     .flower-overflow {
-        height: 315px;
+        position: absolute;
+        inset: 0;
+
+        width: 100%;
+        height: 100%;
+
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 3;
     }
 
     .random-flower {
-        transform: scale(.7);
+        position: absolute;
+        z-index: 4;
+
+        /* Keep the starting flowers small */
+        transform: scale(0);
+        opacity: 0;
     }
 
     .random-flower.bloom {
-        transform: scale(.7) rotate(var(--rotation, 0deg));
+        animation: giantBloomMobile
+            1.8s cubic-bezier(0.17, 0.67, 0.3, 1.3)
+            forwards;
     }
 
-    /* Keep the smaller flowers hidden on narrow screens
-       so the center remains visible. */
-    .f2,
-    .f4,
-    .f6,
-    .f8,
-    .f10,
-    .f12,
-    .f14 {
-        display: none;
+    /* =================================
+       FLOWERS SPREAD ACROSS PHONE
+    ================================= */
+
+    .random-flower:nth-child(1) {
+        left: 5%;
+        top: 12%;
     }
+
+    .random-flower:nth-child(2) {
+        left: 28%;
+        top: 22%;
+    }
+
+    .random-flower:nth-child(3) {
+        left: 58%;
+        top: 10%;
+    }
+
+    .random-flower:nth-child(4) {
+        left: 82%;
+        top: 25%;
+    }
+
+    .random-flower:nth-child(5) {
+        left: 12%;
+        top: 38%;
+    }
+
+    .random-flower:nth-child(6) {
+        left: 42%;
+        top: 42%;
+    }
+
+    .random-flower:nth-child(7) {
+        left: 70%;
+        top: 38%;
+    }
+
+    .random-flower:nth-child(8) {
+        left: 88%;
+        top: 52%;
+    }
+
+    .random-flower:nth-child(9) {
+        left: 5%;
+        top: 60%;
+    }
+
+    .random-flower:nth-child(10) {
+        left: 30%;
+        top: 65%;
+    }
+
+    .random-flower:nth-child(11) {
+        left: 55%;
+        top: 62%;
+    }
+
+    .random-flower:nth-child(12) {
+        left: 78%;
+        top: 70%;
+    }
+
+    .random-flower:nth-child(13) {
+        left: 18%;
+        top: 82%;
+    }
+
+    .random-flower:nth-child(14) {
+        left: 60%;
+        top: 84%;
+    }
+
+
+    /* =================================
+       BIG MOBILE BLOOM
+    ================================= */
+
+    @keyframes giantBloomMobile {
+
+        0% {
+            transform: scale(0);
+            opacity: 0;
+        }
+
+        35% {
+            transform: scale(1.8);
+            opacity: 1;
+        }
+
+        55% {
+            transform: scale(1.25);
+        }
+
+        75% {
+            transform: scale(1.55);
+        }
+
+        100% {
+            transform: scale(1.35);
+            opacity: 1;
+        }
+    }
+
+
+    /* =================================
+       TINY FLOWERS
+    ================================= */
 
     .tiny-flower {
-        font-size: 21px;
+        font-size: 19px;
+    }
+
+    .tf1 {
+        left: 5%;
+        bottom: 20%;
+    }
+
+    .tf2 {
+        left: 25%;
+        bottom: 35%;
+    }
+
+    .tf3 {
+        left: 45%;
+        bottom: 20%;
+    }
+
+    .tf4 {
+        left: 65%;
+        bottom: 32%;
+    }
+
+    .tf5 {
+        left: 85%;
+        bottom: 20%;
+    }
+
+    .tf6 {
+        left: 15%;
+        bottom: 10%;
+    }
+
+    .tf7 {
+        left: 50%;
+        bottom: 10%;
+    }
+
+    .tf8 {
+        left: 80%;
+        bottom: 8%;
     }
 }
+
+
+/* =========================================
+   SMALL PHONES
+========================================= */
 
 @media (max-width: 450px) {
 
     .flower-overflow {
-        height: 285px;
+        width: 100%;
+        height: 100%;
     }
 
-    .f1,
-    .f5,
-    .f7,
-    .f9,
-    .f11,
-    .f13 {
-        transform: scale(.58);
+    .random-flower {
+        /* Slightly smaller for narrow phones */
+        transform: scale(0);
     }
 
     .random-flower.bloom {
-        transform: scale(.58) rotate(var(--rotation, 0deg));
+        animation: giantBloomSmallMobile
+            1.8s cubic-bezier(0.17, 0.67, 0.3, 1.3)
+            forwards;
     }
 
-    .tf3,
-    .tf5,
-    .tf7 {
-        display: none;
+    @keyframes giantBloomSmallMobile {
+
+        0% {
+            transform: scale(0);
+            opacity: 0;
+        }
+
+        35% {
+            transform: scale(1.5);
+            opacity: 1;
+        }
+
+        55% {
+            transform: scale(1.05);
+        }
+
+        75% {
+            transform: scale(1.35);
+        }
+
+        100% {
+            transform: scale(1.15);
+            opacity: 1;
+        }
+    }
+
+    .tiny-flower {
+        font-size: 16px;
     }
 }
 
-/* ========================= POLAROID FLOWER COLLAGE ========================= */ .polaroid-gallery { position: relative; display: grid; grid-template-columns: repeat(2, 1fr); gap: 45px; max-width: 850px; margin: 60px auto; padding: 30px; } .polaroid { position: relative; background: #fff; padding: 12px 12px 25px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); transition: transform 0.4s ease, box-shadow 0.4s ease; z-index: 2; } .polaroid:hover { transform: scale(1.06) rotate(0deg) !important; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); z-index: 10; } .polaroid-photo { width: 100%; height: 230px; overflow: hidden; } .polaroid-photo img { width: 100%; height: 100%; object-fit: cover; display: block; } .polaroid p { text-align: center; margin: 15px 0 0; font-family: "Great Vibes", cursive; font-size: 22px; color: #555; } /* Polaroid positions */ .polaroid-1 { transform: rotate(-5deg); } .polaroid-2 { transform: rotate(4deg); } .polaroid-3 { transform: rotate(3deg); } .polaroid-4 { transform: rotate(-4deg); } /* ========================= FLOWERS ========================= */ .flower { position: absolute; font-size: 42px; z-index: 5; pointer-events: none; animation: flowerFloat 3s ease-in-out infinite; filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.15)); } /* Flower positions */ .flower-1 { top: -25px; left: -25px; transform: rotate(-20deg); } .flower-2 { bottom: -20px; right: -25px; font-size: 35px; animation-delay: .5s; } .flower-3 { top: -25px; right: -25px; transform: rotate(20deg); animation-delay: .8s; } .flower-4 { bottom: -22px; left: -22px; font-size: 36px; animation-delay: 1.2s; } .flower-5 { top: -28px; left: -25px; font-size: 44px; animation-delay: 1.5s; } .flower-6 { bottom: -22px; right: -25px; font-size: 36px; animation-delay: 2s; } .flower-7 { top: -25px; right: -25px; font-size: 40px; animation-delay: 2.3s; } .flower-8 { bottom: -20px; left: -25px; font-size: 35px; animation-delay: 2.7s; } /* Gentle floating/blooming effect */ @keyframes flowerFloat { 0%, 100% { transform: translateY(0) rotate(0deg) scale(1); } 50% { transform: translateY(-6px) rotate(8deg) scale(1.08); } } /* ========================= MOBILE ========================= */ @media (max-width: 700px) { .polaroid-gallery { grid-template-columns: 1fr; gap: 50px; padding: 25px; } .polaroid-photo { height: 260px; } .flower { font-size: 36px; } }
+
+/* ========================= POLAROID FLOWER COLLAGE ========================= */
+ .polaroid-gallery {
+    width: min(900px, 95%);
+    margin: 40px auto;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 45px;
+
+    padding-bottom: 80px;
+}
+ .polaroid { position: relative; background: #fff; padding: 12px 12px 25px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); transition: transform 0.4s ease, box-shadow 0.4s ease; z-index: 2; } .polaroid:hover { transform: scale(1.06) rotate(0deg) !important; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); z-index: 10; } .polaroid-photo { width: 100%; height: 230px; overflow: hidden; } .polaroid-photo img { width: 100%; height: 100%; object-fit: cover; display: block; } .polaroid p { text-align: center; margin: 15px 0 0; font-family: "Great Vibes", cursive; font-size: 22px; color: #555; } /* Polaroid positions */ .polaroid-1 { transform: rotate(-5deg); } .polaroid-2 { transform: rotate(4deg); } .polaroid-3 { transform: rotate(3deg); } .polaroid-4 { transform: rotate(-4deg); } /* ========================= FLOWERS ========================= */ .flower { position: absolute; font-size: 42px; z-index: 5; pointer-events: none; animation: flowerFloat 3s ease-in-out infinite; filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.15)); } /* Flower positions */ .flower-1 { top: -25px; left: -25px; transform: rotate(-20deg); } .flower-2 { bottom: -20px; right: -25px; font-size: 35px; animation-delay: .5s; } .flower-3 { top: -25px; right: -25px; transform: rotate(20deg); animation-delay: .8s; } .flower-4 { bottom: -22px; left: -22px; font-size: 36px; animation-delay: 1.2s; } .flower-5 { top: -28px; left: -25px; font-size: 44px; animation-delay: 1.5s; } .flower-6 { bottom: -22px; right: -25px; font-size: 36px; animation-delay: 2s; } .flower-7 { top: -25px; right: -25px; font-size: 40px; animation-delay: 2.3s; } .flower-8 { bottom: -20px; left: -25px; font-size: 35px; animation-delay: 2.7s; } /* Gentle floating/blooming effect */ @keyframes flowerFloat { 0%, 100% { transform: translateY(0) rotate(0deg) scale(1); } 50% { transform: translateY(-6px) rotate(8deg) scale(1.08); } } /* ========================= MOBILE ========================= */ @media (max-width: 700px) { .polaroid-gallery { grid-template-columns: 1fr; gap: 50px; padding: 25px; } .polaroid-photo { height: 260px; } .flower { font-size: 36px; } }
+
+ @media (max-width: 700px) {
+
+    .polaroid-gallery {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        width: 90%;
+    }
+
+    .letter-section,
+    .memories-section {
+        padding: 40px 15px;
+    }
+}

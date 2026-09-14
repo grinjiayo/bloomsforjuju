@@ -1,8 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    document.documentElement.classList.add("scroll-locked");
-    document.body.classList.add("scroll-locked");
-
     const bloomButton = document.getElementById("bloomButton");
     const backgroundMusic = document.getElementById("backgroundMusic");
 
@@ -18,17 +15,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const memoriesSection = document.getElementById("memories");
 
 
-    /* =========================
-       AUTOMATIC BLOOM
-    ========================= */
+    /* =================================
+       START WITH SCROLLING LOCKED
+    ================================= */
+
+    document.documentElement.classList.add("scroll-locked");
+    document.body.classList.add("scroll-locked");
+
+
+    /* =================================
+       AUTOMATIC FLOWER BLOOM
+    ================================= */
 
     function startBloom() {
 
         bloomButton.disabled = true;
-        bloomButton.textContent = "Let the flowers bloom... 🌸";
+
+        bloomButton.textContent =
+            "Watch the flowers bloom... 🌸";
 
 
-        // Automatically start music
+        /* MUSIC */
+
         backgroundMusic.volume = 0.5;
 
         backgroundMusic.play().catch((error) => {
@@ -36,22 +44,27 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
 
-        // Bloom flowers one by one
+        /* FLOWERS */
+
         flowers.forEach((flower, index) => {
 
             setTimeout(() => {
+
                 flower.classList.add("bloom");
+
             }, index * 180);
 
         });
 
 
-        // Calculate bloom duration
+        /* TOTAL BLOOM TIME */
+
         const bloomDuration =
             (flowers.length * 180) + 1800;
 
 
-        // Change button after blooming
+        /* CHANGE BUTTON TEXT */
+
         setTimeout(() => {
 
             bloomButton.textContent =
@@ -62,171 +75,146 @@ document.addEventListener("DOMContentLoaded", () => {
         }, bloomDuration);
 
 
-        // Automatically move to gift section
-    setTimeout(() => {
+        /* =================================
+           GO TO GIFT AUTOMATICALLY
+        ================================= */
 
-    document.documentElement.classList.remove("scroll-locked");
-    document.body.classList.remove("scroll-locked");
+        setTimeout(() => {
 
-    giftSection.classList.add("show");
+            // Unlock scrolling temporarily
+            document.documentElement.classList.remove(
+                "scroll-locked"
+            );
 
-    giftSection.scrollIntoView({
-        behavior: "smooth"
-    });
+            document.body.classList.remove(
+                "scroll-locked"
+            );
 
-}, bloomDuration + 1000);
+
+            // Show gift
+            giftSection.classList.add("show");
+
+
+            // Move to gift
+            giftSection.scrollIntoView({
+                behavior: "smooth"
+            });
+
+
+            /*
+             * Lock scrolling again after
+             * reaching the gift.
+             */
+
+            setTimeout(() => {
+
+                document.documentElement.classList.add(
+                    "scroll-locked"
+                );
+
+                document.body.classList.add(
+                    "scroll-locked"
+                );
+
+            }, 1200);
+
+        }, bloomDuration + 1000);
 
     }
 
 
-    /* =========================
+    /* =================================
        START AUTOMATICALLY
-    ========================= */
+    ================================= */
 
-    // Wait a little after page loads
     setTimeout(() => {
+
         startBloom();
+
     }, 1500);
 
 
-    /* =========================
-       GIFT
-    ========================= */
+    /* =================================
+       GIFT CLICK
+    ================================= */
 
     gift.addEventListener("click", () => {
 
-    gift.classList.add("opened");
+        // Unlock temporarily
+        document.documentElement.classList.remove(
+            "scroll-locked"
+        );
 
-    setTimeout(() => {
-
-        letterSection.scrollIntoView({
-            behavior: "smooth"
-        });
-
-    }, 1000);
-
-});
+        document.body.classList.remove(
+            "scroll-locked"
+        );
 
 
-    /* =========================
-       MEMORIES
-    ========================= */
+        // Open gift
+        gift.classList.add("opened");
+
+
+        /* Go to letter */
+
+        setTimeout(() => {
+
+            letterSection.scrollIntoView({
+                behavior: "smooth"
+            });
+
+
+            // Lock again after reaching letter
+            setTimeout(() => {
+
+                document.documentElement.classList.add(
+                    "scroll-locked"
+                );
+
+                document.body.classList.add(
+                    "scroll-locked"
+                );
+
+            }, 1200);
+
+        }, 1000);
+
+    });
+
+
+    /* =================================
+       MEMORIES BUTTON
+    ================================= */
 
     memoriesButton.addEventListener("click", () => {
 
+        // Unlock temporarily
+        document.documentElement.classList.remove(
+            "scroll-locked"
+        );
+
+        document.body.classList.remove(
+            "scroll-locked"
+        );
+
+
+        // Go to memories
         memoriesSection.scrollIntoView({
             behavior: "smooth"
         });
 
-    });
 
-});
-
-
-// /* =========================================
-//    GIFT OPENING
-// ========================================= */
-
-// gift.addEventListener("click", () => {
-
-//     // Don't allow the gift to be opened twice
-//     if (gift.classList.contains("opened")) {
-//         return;
-//     }
-
-
-//     // Open gift
-//     gift.classList.add("opened");
-
-
-//     // Change text underneath gift
-//     const giftText = document.querySelector(".click-gift");
-
-//     if (giftText) {
-
-//         giftText.textContent =
-//             "Something special inside... 💙";
-
-//     }
-
-
-//     // Go to letter
-//     setTimeout(() => {
-
-//         letterSection.scrollIntoView({
-//             behavior: "smooth"
-//         });
-
-//     }, 1000);
-
-// });
-
-
-// /* =========================================
-//    LETTER → MEMORIES
-// ========================================= */
-
-// memoriesButton.addEventListener("click", () => {
-
-//     memories.scrollIntoView({
-//         behavior: "smooth"
-//     });
-
-// });
-
-
-/* =========================================
-   IMAGE FALLBACK
-========================================= */
-
-const images = document.querySelectorAll(".polaroid-photo img");
-
-images.forEach((image) => {
-
-    image.addEventListener("error", () => {
-
-        image.style.display = "none";
-
-
-        const placeholder = document.createElement("div");
-
-        placeholder.className =
-            "image-placeholder";
-
-
-        placeholder.innerHTML = "✿";
-
-
-        image.parentElement.insertBefore(
-            placeholder,
-            image
-        );
-
-    });
-
-});
-
-
-/* =========================================
-   OPTIONAL: CLICK FLOWER EFFECT
-========================================= */
-
-flowers.forEach((flower) => {
-
-    flower.addEventListener("click", () => {
-
-        flower.style.transition =
-            "transform .4s ease";
-
-        flower.style.transform =
-            "scale(1.15) rotate(8deg)";
-
+        // Lock after reaching memories
         setTimeout(() => {
 
-            flower.style.transform =
-                "scale(1)";
+            document.documentElement.classList.add(
+                "scroll-locked"
+            );
 
-        }, 400);
+            document.body.classList.add(
+                "scroll-locked"
+            );
+
+        }, 1200);
 
     });
 
