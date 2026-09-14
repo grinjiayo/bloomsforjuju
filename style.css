@@ -4,8 +4,14 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+html.scroll-locked,
+body.scroll-locked {
+    overflow: hidden;
+}
+
+html,
+body {
+    overflow-x: hidden;
 }
 
 body {

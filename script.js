@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    document.documentElement.classList.add("scroll-locked");
+    document.body.classList.add("scroll-locked");
+
     const bloomButton = document.getElementById("bloomButton");
     const backgroundMusic = document.getElementById("backgroundMusic");
 
@@ -60,15 +63,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         // Automatically move to gift section
-        setTimeout(() => {
+    setTimeout(() => {
 
-            giftSection.classList.add("show");
+    document.documentElement.classList.remove("scroll-locked");
+    document.body.classList.remove("scroll-locked");
 
-            giftSection.scrollIntoView({
-                behavior: "smooth"
-            });
+    giftSection.classList.add("show");
 
-        }, bloomDuration + 1000);
+    giftSection.scrollIntoView({
+        behavior: "smooth"
+    });
+
+}, bloomDuration + 1000);
 
     }
 
@@ -89,17 +95,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     gift.addEventListener("click", () => {
 
-        gift.classList.add("opened");
+    gift.classList.add("opened");
 
-        setTimeout(() => {
+    setTimeout(() => {
 
-            letterSection.scrollIntoView({
-                behavior: "smooth"
-            });
+        letterSection.scrollIntoView({
+            behavior: "smooth"
+        });
 
-        }, 1000);
+    }, 1000);
 
-    });
+});
 
 
     /* =========================
