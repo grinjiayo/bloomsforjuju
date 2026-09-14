@@ -1,4 +1,11 @@
 const bloomButton = document.getElementById("bloomButton");
+const backgroundMusic = document.getElementById("backgroundMusic");
+
+bloomButton.addEventListener("click", () => {
+    backgroundMusic.play().catch(error => {
+        console.log("Music could not start:", error);
+    });
+});
 
 const flowers = document.querySelectorAll(
     ".random-flower, .tiny-flower"
