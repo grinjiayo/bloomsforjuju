@@ -122,7 +122,7 @@ memoriesButton.addEventListener("click", () => {
    IMAGE FALLBACK
 ========================================= */
 
-const images = document.querySelectorAll(".photo img");
+const images = document.querySelectorAll(".polaroid-photo img");
 
 images.forEach((image) => {
 
