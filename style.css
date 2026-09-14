@@ -669,30 +669,29 @@ body {
 ========================================= */
 
 .letter-section {
-    /* min-height: 100vh;
-
-    padding: 100px 20px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center; */
-
-     height: 100vh;
+    height: 100vh;
     min-height: 100vh;
-
     overflow-y: auto;
     overflow-x: hidden;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+
+    background: radial-gradient(
+        circle at center,
+        #ffffff 0%,
+        #eaf7ff 55%,
+        #d8f0ff 100%
+    );
+
     scroll-behavior: smooth;
+}
 
-    padding: 60px 20px;
-
-    background:
-        radial-gradient(
-            circle at center,
-            #ffffff,
-            #e5f6ff
-        );
+.letter-section > * {
+    flex-shrink: 0;
 }
 
 .letter-section::-webkit-scrollbar {
@@ -711,7 +710,8 @@ body {
 .paper {
     position: relative;
 
-    width: min(720px, 100%);
+    width: min(800px, 92%);
+    margin: auto;
 
     padding: 65px clamp(25px, 7vw, 75px);
 

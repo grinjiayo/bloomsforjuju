@@ -1,7 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     const bloomButton = document.getElementById("bloomButton");
+    
     const backgroundMusic = document.getElementById("backgroundMusic");
+
+    backgroundMusic.volume = 0.5;
+
+    function playMusic() {
+        if (backgroundMusic.paused) {
+            backgroundMusic.play().catch((error) => {
+                console.log("Music could not start:", error);
+            });
+        }
+    }
 
     const flowers = document.querySelectorAll(
         ".random-flower, .tiny-flower"
@@ -29,98 +40,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function startBloom() {
 
-        bloomButton.disabled = true;
+    bloomButton.disabled = true;
+    bloomButton.textContent = "Watch the flowers bloom... 🌸";
 
-        bloomButton.textContent =
-            "Watch the flowers bloom... 🌸";
+    // Try autoplay
+    playMusic();
 
+    flowers.forEach((flower, index) => {
+        setTimeout(() => {
+            flower.classList.add("bloom");
+        }, index * 180);
+    });
 
-        /* MUSIC */
+    const bloomDuration =
+        (flowers.length * 180) + 1800;
 
-        backgroundMusic.volume = 0.5;
+    setTimeout(() => {
+        bloomButton.textContent = "The garden is blooming 🌷";
+        bloomButton.classList.add("bloomed");
+    }, bloomDuration);
 
-        backgroundMusic.play().catch((error) => {
-            console.log("Music autoplay blocked:", error);
+    setTimeout(() => {
+
+        document.documentElement.classList.remove("scroll-locked");
+        document.body.classList.remove("scroll-locked");
+
+        giftSection.classList.add("show");
+
+        giftSection.scrollIntoView({
+            behavior: "smooth"
         });
 
-
-        /* FLOWERS */
-
-        flowers.forEach((flower, index) => {
-
-            setTimeout(() => {
-
-                flower.classList.add("bloom");
-
-            }, index * 180);
-
-        });
-
-
-        /* TOTAL BLOOM TIME */
-
-        const bloomDuration =
-            (flowers.length * 180) + 1800;
-
-
-        /* CHANGE BUTTON TEXT */
-
         setTimeout(() => {
+            document.documentElement.classList.add("scroll-locked");
+            document.body.classList.add("scroll-locked");
+        }, 1200);
 
-            bloomButton.textContent =
-                "The garden is blooming 🌷";
-
-            bloomButton.classList.add("bloomed");
-
-        }, bloomDuration);
-
-
-        /* =================================
-           GO TO GIFT AUTOMATICALLY
-        ================================= */
-
-        setTimeout(() => {
-
-            // Unlock scrolling temporarily
-            document.documentElement.classList.remove(
-                "scroll-locked"
-            );
-
-            document.body.classList.remove(
-                "scroll-locked"
-            );
-
-
-            // Show gift
-            giftSection.classList.add("show");
-
-
-            // Move to gift
-            giftSection.scrollIntoView({
-                behavior: "smooth"
-            });
-
-
-            /*
-             * Lock scrolling again after
-             * reaching the gift.
-             */
-
-            setTimeout(() => {
-
-                document.documentElement.classList.add(
-                    "scroll-locked"
-                );
-
-                document.body.classList.add(
-                    "scroll-locked"
-                );
-
-            }, 1200);
-
-        }, bloomDuration + 1000);
-
-    }
+    }, bloomDuration + 1000);
+}
 
 
     /* =================================
@@ -140,45 +97,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     gift.addEventListener("click", () => {
 
-        // Unlock temporarily
-        document.documentElement.classList.remove(
-            "scroll-locked"
-        );
+    // User has now interacted with the page,
+    // so browsers will normally allow the music.
+    playMusic();
 
-        document.body.classList.remove(
-            "scroll-locked"
-        );
+    document.documentElement.classList.remove("scroll-locked");
+    document.body.classList.remove("scroll-locked");
 
+    gift.classList.add("opened");
 
-        // Open gift
-        gift.classList.add("opened");
+    setTimeout(() => {
 
-
-        /* Go to letter */
+        letterSection.scrollIntoView({
+            behavior: "smooth"
+        });
 
         setTimeout(() => {
+            document.documentElement.classList.add("scroll-locked");
+            document.body.classList.add("scroll-locked");
+        }, 1200);
 
-            letterSection.scrollIntoView({
-                behavior: "smooth"
-            });
-
-
-            // Lock again after reaching letter
-            setTimeout(() => {
-
-                document.documentElement.classList.add(
-                    "scroll-locked"
-                );
-
-                document.body.classList.add(
-                    "scroll-locked"
-                );
-
-            }, 1200);
-
-        }, 1000);
-
-    });
+    }, 1000);
+});
 
 
     /* =================================
